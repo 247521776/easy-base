@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outDir": "dits",
+        "declaration": true,
+        "target": "ES6",
+        "experimentalDecorators": true
+    },
+    "exclude": ["node_modules", "dist"],
+    "include": ["./src/**/*.ts"]
+}
