@@ -1,2 +1,2 @@
 # easy-base
-Not depending on a specific framework, just a simple framework
+Koa based typescript framework
