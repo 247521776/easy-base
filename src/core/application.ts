@@ -27,8 +27,8 @@ export class Application {
             .forEach(file => require(file));
     }
 
-    public listen(port: number) {
-        const server = this.app.listen(port);
+    public listen(port?: number, hostname?: string, backlog?: number, listeningListener?: () => void) {
+        const server = this.app.listen(...Object.values(arguments));
         return server;
     }
 

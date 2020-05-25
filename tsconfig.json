@@ -4,14 +4,15 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "outDir": "dits",
+        "outDir": "dist",
         "declaration": true,
-        "target": "ES6",
+        "target": "ES2017",
         "types": [
             "reflect-metadata"
         ],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "moduleResolution": "node"
     },
     "exclude": ["node_modules", "dist"],
     "include": ["./src/**/*.ts"]
