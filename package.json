@@ -1,5 +1,5 @@
 {
-  "name": "easy-base",
+  "name": "@big-boom/easy-base",
   "version": "0.0.1",
   "description": "Not depending on a specific framework, just a simple framework",
   "main": "dist/index.js",
