@@ -2,7 +2,7 @@
   "name": "easy-base",
   "version": "0.0.1",
   "description": "Not depending on a specific framework, just a simple framework",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf -rf ./dist && tsc"
@@ -46,5 +46,8 @@
     "koa-router": "^8.0.8",
     "readdirp": "^3.4.0",
     "reflect-metadata": "^0.1.13"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
