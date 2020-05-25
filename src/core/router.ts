@@ -18,8 +18,8 @@ export class Router {
             const classMiddleware: Function[] = Reflect.getMetadata(MIDDLEWARE_CLASS_METADATA, controller) || [];
             const routers = Reflect.getMetadata(PATH_METADATA, controller) || [];
 
-            for (const router of routers) {
-                const { method, path, propKey } = router;
+            for (const routerInfo of routers) {
+                const { method, path, propKey } = routerInfo;
 
                 const isDiscardRouter: boolean = Reflect.getMetadata(DISCARD_PATH_METADATA, controller, propKey);
                 if (isDiscardRouter) {
