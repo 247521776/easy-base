@@ -48,6 +48,7 @@
     "reflect-metadata": "^0.1.13"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ]
 }
