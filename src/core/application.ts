@@ -21,7 +21,7 @@ export class Application {
     }
 
     public async loadFile(filePath: string) {
-        const files = await readdirp.promise(path.resolve(this._options.rootPath, filePath), { fileFilter: ["*,js", "*.ts"] });
+        const files = await readdirp.promise(path.resolve(this._options.rootPath, filePath), { fileFilter: ["*.js", "*.ts"] });
         files
             .map(file => file.fullPath.replace(JsTsReg, ""))
             .forEach(file => require(file));

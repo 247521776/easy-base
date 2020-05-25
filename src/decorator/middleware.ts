@@ -16,7 +16,7 @@ export function middleware(functions: Function[] | Function) {
     
             Reflect.defineMetadata(MIDDLEWARE_CLASS_METADATA, middleware, target);
         }
-        else if (args.length === 2) {
+        else if (args.length === 3) {
             const [target, propKey] = args;
 
             const middleware = Reflect.getMetadata(MIDDLEWARE_METADATA, target, propKey) || [];
@@ -30,7 +30,9 @@ export function middleware(functions: Function[] | Function) {
     
             Reflect.defineMetadata(MIDDLEWARE_METADATA, middleware, target, propKey);
         }
+        else {
+            throw new Error('Middleware Can only be used for classes or methods decoration');
+        }
 
-        throw new Error('Middleware Can only be used for classes or methods decoration');
     };
 }
