@@ -3,6 +3,7 @@ import path = require("path");
 import readdirp = require("readdirp");
 import { Router } from "./router";
 import { Options } from "./types";
+import getDefaultOptions from "./default-options";
 
 const JsTsReg = /\.[j|t]s$/;
 
@@ -11,7 +12,7 @@ export class Application {
     private _options: Options;
 
     public constructor(options: Options) {
-        this._options = options;
+        this._options = getDefaultOptions(options);
         this.app = new Koa();
     }
 
@@ -28,7 +29,7 @@ export class Application {
     }
 
     public listen(port?: number, hostname?: string, backlog?: number, listeningListener?: () => void) {
-        const server = this.app.listen(...Object.values(arguments));
+        const server = this.app.listen.apply(this.app, arguments);
         return server;
     }
 

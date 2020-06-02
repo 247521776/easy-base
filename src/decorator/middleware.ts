@@ -13,13 +13,14 @@ export function middleware(functions: Function[] | Function) {
             else {
                 middleware.push(functions);
             }
-    
+
             Reflect.defineMetadata(MIDDLEWARE_CLASS_METADATA, middleware, target);
         }
-        else if (args.length === 3) {
+        else if (args.length === 3 && typeof args[2] !== "number") {
             const [target, propKey] = args;
+            const { constructor } = target;
 
-            const middleware = Reflect.getMetadata(MIDDLEWARE_METADATA, target, propKey) || [];
+            const middleware = Reflect.getMetadata(MIDDLEWARE_METADATA, constructor, propKey) || [];
 
             if (Array.isArray(functions)) {
                 middleware.push(...functions);
@@ -27,8 +28,8 @@ export function middleware(functions: Function[] | Function) {
             else {
                 middleware.push(functions);
             }
-    
-            Reflect.defineMetadata(MIDDLEWARE_METADATA, middleware, target, propKey);
+
+            Reflect.defineMetadata(MIDDLEWARE_METADATA, middleware, constructor, propKey);
         }
         else {
             throw new Error('Middleware Can only be used for classes or methods decoration');

@@ -9,8 +9,9 @@ import { PATH_METADATA } from "../core/constants";
 function createHttpMethod(method: string) {
     return function httpMethodDecorator(path: string) {
         return (target, propKey) => {
+            const { constructor } = target;
             // 获取该类上修饰过的路由信息
-            const routers = Reflect.getMetadata(PATH_METADATA, target) || [];
+            const routers = Reflect.getMetadata(PATH_METADATA, constructor) || [];
 
             routers.push({
                 method,
@@ -19,7 +20,7 @@ function createHttpMethod(method: string) {
             });
 
             // 保存路由信息
-            Reflect.defineMetadata(PATH_METADATA, routers, target);
+            Reflect.defineMetadata(PATH_METADATA, routers, constructor);
         };
     };
 }

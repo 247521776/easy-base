@@ -7,13 +7,15 @@ export function disable() {
 
             Reflect.defineMetadata(DISCARD_CLASS_METADATA, true, target);
         }
-        else if (args.length === 2) {
+        else if (args.length === 3 && typeof args[2] !== "number") {
             const [target, propKey] = args;
+            const { constructor } = target;
 
-            Reflect.defineMetadata(DISCARD_PATH_METADATA, true, target, propKey);
+            Reflect.defineMetadata(DISCARD_PATH_METADATA, true, constructor, propKey);
 
         }
-
-        throw new Error('Disable decorator Can only be used for classes or methods decoration');
+        else {
+            throw new Error('Disable decorator Can only be used for classes or methods decoration');
+        }
     };
 }

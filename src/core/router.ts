@@ -2,11 +2,12 @@ import * as koaBody from 'koa-body';
 import * as OriginalRouter from 'koa-router';
 import { CONTROLLER_METADATA, DISCARD_CLASS_METADATA, DISCARD_PATH_METADATA, MIDDLEWARE_CLASS_METADATA, MIDDLEWARE_METADATA, PATH_METADATA } from "./constants";
 import { container } from "./inversify.config";
+import { Constructor } from './types';
 
 export class Router {
     public init () {
         const router = new OriginalRouter();
-        const controllers = container.getAll(CONTROLLER_METADATA);
+        const controllers = container.getAll<Constructor>(CONTROLLER_METADATA);
         router.use(koaBody());
 
         for (const controller of controllers) {
@@ -28,7 +29,11 @@ export class Router {
 
                 const routerMiddleware: Function[] = Reflect.getMetadata(MIDDLEWARE_METADATA, controller, propKey) || [];
 
-                router[method](path, ...classMiddleware, ...routerMiddleware, controller[propKey]);
+                router[method](path, ...classMiddleware, ...routerMiddleware, async (ctx, next) => {
+                    const instance = container.get(controller.name);
+
+                    await instance[propKey](ctx, next);
+                });
             }
         }
 
